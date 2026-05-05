@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
+<div class="container">
+
+    <h3>Admin Page</h3>
+
+    <table style="width: 80%;">
+        <tr>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Transactions</th>
+        </tr>
+
+        {% for acc in account %}
+        <tr>
+            <td>{{acc.name}}</td>
+            <td>{{acc.balance}}</td>
+            <td>{{acc.transaction|length}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <a href="/dashboard"> Back </a>
+
+
+</div>

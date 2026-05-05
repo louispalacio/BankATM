@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    {% with message = get_flashed_messages(with_categories=true) %}
+        {% if message %}
+            {% for category, message in message %}
+                <div class="flash {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<h2>Fund Transfer</h2>
+<form method="post">
+    Receiver Name: <select name="receiver">
+        {% for acc in account %}
+                <option value="{{acc.name}}">{{acc.name}} - {{acc.account_number}} </option>
+        {% endfor %}
+    </select>
+    Amount: <input type="number" name="amount" required><br>
+    <button type="submit">Send</button>
+</form>
+<br>
+
+<a href="/dashboard">Back</a>
+</div>

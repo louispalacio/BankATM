@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    {% with message = get_flashed_messages(with_categories=true) %}
+        {% if message %}
+            {% for category, message in message %}
+                <div class="flash {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h1>Dashboard</h1>
+    <h2>Account Number: {{ account.account_number }}</h2>
+    <p class="balance">Balance: ${{ balance }}</p>
+
+    <h2>Deposit / Withdraw</h2>
+    <form method="post">
+        Amount: <input type="number" name="amount" required>
+        <button name="action" value="deposit">Deposit</button>
+        <button name="action" value="withdraw">Withdraw</button>
+    </form>
+
+    <br>
+    <a href="/transfer">Transfer Funds</a>
+    <a href="/logout">Logout</a>
+
+    <h3>Transaction History</h3>
+    <table style="width:100%; border-collapse: collapse;">
+        <tbody>
+            {% for tx in transaction %}
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td style="padding: 8px 0;">{{ tx }}</td>
+                </tr>
+            {% else %}
+                <tr><td style="color:gray;">No transactions yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 10px;">
+        <a href="/my_profile" style="color: green;">Profile</a>
+        <a href="/download_statement" style="color: green;">Download Statement</a>
+        <a href="/download_pdf_format" style="color: green;">Download PDF File</a>
+    </div>
+</div>

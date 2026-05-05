@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    {% with message = get_flashed_messages(with_categories=true) %}
+        {% if message %}
+            {% for category, message in message %}
+                <div class="flask {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<h2>Create Account</h2>
+<form method="post">
+    Name: <input type="text" name="name" required> <br>
+    Email: <input type="email" name="email" required> <br>
+    Initial Balance: <input type="number" name="balance" required><br>
+    PIN: <input type="password" name="pin" required>
+    <button type="submit">Create Account</button>
+</form>
+</div>

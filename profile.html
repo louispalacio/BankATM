@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    {% with message = get_flashed_messages(with_categories=true) %}
+        {% if message %}
+            {% for category, message in message %}
+                <div class="flash {{category}}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h1>My Profile</h1>
+
+    <table style="width:100%; border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px 0; color: gray;">Name</td>
+            <td style="padding: 8px 0;"><strong>{{ account.name }}</strong></td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px 0; color: gray;">Email</td>
+            <td style="padding: 8px 0;">{{ account.email }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px 0; color: gray;">Account Number</td>
+            <td style="padding: 8px 0;">{{ account.account_number }}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px 0; color: gray;">Balance</td>
+            <td style="padding: 8px 0; color: green;"><strong>${{ account.balance }}</strong></td>
+        </tr>
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px 0; color: gray;">Total Transactions</td>
+            <td style="padding: 8px 0;">{{ account.transaction | length }}</td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+</div>
